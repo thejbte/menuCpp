@@ -51,7 +51,7 @@ user::user(const std::string& filename){
 
         //buscar en el archivo json el ultimo dato  por objetos
         int i=0;
-        for(  i =0; (this->iSFound(i) > 0 ) ; i++){
+        for(  i =0; (this->iSFound(i, false) > 0 ) ; i++){
         }
         this->person.id =i;
         this->filename = filename;
@@ -62,7 +62,7 @@ user::user(const std::string& filename){
 bool user::add(){
     bool ret = true;
     do{
-        if(this->iSFound(person.id) == 0){
+        if(this->iSFound(person.id, false) == 0){
             nlohmann::json data= {
                 { std::to_string(person.id++), {
                     {"name", person.name},
@@ -106,6 +106,20 @@ bool user::iSFound(int id){
         retVal = true;
     else{
         std::cout << KRED << "Id: \""<< id <<"\" Do not was found. " << KNRM << '\n';
+        retVal = false;
+    }
+    return retVal;
+    
+}
+
+bool user::iSFound(int id, bool out){
+    bool retVal = false;
+    auto var = storage.find(std::to_string(id));
+    if( (var != storage.end()) == true )
+        retVal = true;
+    else{
+        if (out == true)
+            std::cout << KRED << "Id: \""<< id <<"\" Do not was found. " << KNRM << '\n';
         retVal = false;
     }
     return retVal;

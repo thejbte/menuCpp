@@ -16,6 +16,7 @@ class user {
         bool add();
         bool update(int id);
         bool iSFound(int id);
+        bool iSFound(int id,bool out);
         bool erase(int id);
         void list();
 
