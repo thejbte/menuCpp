@@ -26,25 +26,13 @@ class user {
         void setId( int id);
         void setVariables( const struct person_t obj);
 
-        user(){
-            /*constructor*/
-             this->person.age =0;
-             this->person.id =0;
-
-            storage = {
-                { std::to_string( this->person.id), {
-                    {"name",  this->person.name},
-                    {"last_name", this->person.lastName},
-                    {"email",  this->person.email},
-                    {"age",  this->person.age}
-                    }
-                }
-            };
-        }
+        user();
 
         ~user(){
             /*destructor*/
         }
+
+
     private:
         nlohmann::json storage;
         struct person_t person;
