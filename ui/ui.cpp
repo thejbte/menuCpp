@@ -17,7 +17,10 @@ void ui::clearScreen(){
 
 ui::options_t ui::getMenuOptions(){
 
-    std::cout << std::endl << LOGO ;
+    std::cout << std::endl << LOGO 
+                        << KBLU <<"V" << athmost_VERSION_MAJOR  << "." 
+                        << athmost_VERSION_MINOR  << "." 
+                        << athmost_VERSION_PATCH  << KNRM <<std::endl;
     std::cout << KYEL << "------------------------------------------------------------"<<std::endl;
     std::cout<< std::setw(39) << "* Available options *"  <<std::endl;
     std::cout<< "------------------------------------------------------------" <<std::endl;

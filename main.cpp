@@ -2,7 +2,6 @@
 #include <iostream>
 #include "single_include/nlohmann/json.hpp"
 #include "app/app.h"
-using json = nlohmann::json;
 
 int main(){
 
