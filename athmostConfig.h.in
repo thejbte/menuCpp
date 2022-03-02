@@ -1,0 +1,3 @@
+#define athmost_VERSION_MAJOR  @athmost_VERSION_MAJOR@
+#define athmost_VERSION_MINOR  @athmost_VERSION_MINOR@
+#define athmost_VERSION_PATCH  @athmost_VERSION_PATCH@
