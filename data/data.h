@@ -26,7 +26,7 @@ class user {
         void setId( int id);
         void setVariables( const struct person_t obj);
 
-        user();
+        user(const std::string& filename);
 
         ~user(){
             /*destructor*/
@@ -35,6 +35,7 @@ class user {
 
     private:
         nlohmann::json storage;
+        std::string filename;
         struct person_t person;
 };
 

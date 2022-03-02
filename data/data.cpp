@@ -24,10 +24,10 @@ namespace JSONUTILS
     }
 }
 
-user::user(){
+user::user(const std::string& filename){
     /*constructor*/
         try{
-            storage = JSONUTILS::openfile("../storage.json");
+            storage = JSONUTILS::openfile(filename);
         }
         catch (nlohmann::json::exception& e) {
             this->person.id = 0;
@@ -43,7 +43,7 @@ user::user(){
                     }
                 }
             };
-            JSONUTILS::writeTofile("../storage.json",storage );
+            JSONUTILS::writeTofile(filename,storage );
             std::cout << KRED << "File empty: " << KNRM << std::endl ;
 
         }
@@ -54,7 +54,7 @@ user::user(){
         for(  i =0; (this->iSFound(i) > 0 ) ; i++){
         }
         this->person.id =i;
-        
+        this->filename = filename;
 
 
 }
@@ -74,7 +74,7 @@ bool user::add(){
             };
             
             storage.insert(data.begin() , data.end());
-            JSONUTILS::writeTofile("../storage.json",storage );
+            JSONUTILS::writeTofile(filename,storage );
             ret = false;
             //return 1;
         }else{
@@ -95,7 +95,7 @@ bool user::update(int id ){
         };
         
         storage.update(obj);
-        JSONUTILS::writeTofile("../storage.json",storage );
+        JSONUTILS::writeTofile(filename,storage );
     return 1;
 }
 
@@ -114,7 +114,7 @@ bool user::iSFound(int id){
 
 bool user::erase(int id){
     auto retVal = storage.erase(std::to_string(id));
-    JSONUTILS::writeTofile("../storage.json",storage );
+    JSONUTILS::writeTofile(filename,storage );
     return retVal;
 }
 void user::list(){

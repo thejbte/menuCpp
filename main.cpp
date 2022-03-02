@@ -6,7 +6,7 @@ using json = nlohmann::json;
 
 int main(){
 
-application app;
+application app("../storage.json");
 int ret = 1;
 
 while(ret){

@@ -9,6 +9,7 @@ class application {
         ui interfaz;
 
     public:
+        application(const std::string& filename): usuario(filename){}
         int appRun();
         
 };
