@@ -94,10 +94,10 @@ struct person_t ui::getInputForUpdate(int id){
     return person; 
 }
 
-uint8_t ui::getAgeWithException()
+int16_t ui::getAgeWithException()
 {   std::string in;
     int var =1;
-    uint8_t age;
+    int16_t age;
     while(var) {
         int count=0;
       try
@@ -105,7 +105,12 @@ uint8_t ui::getAgeWithException()
          std::cout<< "Entry age: "<<std::endl ;
          std::cin >> in;
          age = std::stoi(in);
-         var = 0;
+         if(age >=0 && age < MAX_AGE ){
+            var = 0;
+         }else {
+            std::cout << KRED << "Invalid Input , should be a valid Age." << KNRM << std::endl ;
+            var = 1;
+         }
       } 
       catch ( const std::invalid_argument  &e )
       {
@@ -115,10 +120,10 @@ uint8_t ui::getAgeWithException()
     return age;
 }
 
-uint8_t ui::getAgeWithException(const int val )
+int16_t ui::getAgeWithException(const int val )
 {   std::string in;
     int var =1;
-    uint8_t age;
+    int16_t age;
     while(var) {
         int count=0;
       try
@@ -127,7 +132,12 @@ uint8_t ui::getAgeWithException(const int val )
          std::cin >> in;
          if( in != "")
             age = std::stoi(in);
-         var = 0;
+         if(age >=0 && age < MAX_AGE ){
+            var = 0;
+         }else {
+            std::cout << KRED << "Invalid Input , should be a valid Age." << KNRM << std::endl ;
+            var = 1;
+         }
       } 
       catch ( const std::invalid_argument  &e )
       {

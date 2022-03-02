@@ -4,6 +4,8 @@
 #include <iostream>
 #include  <stdint.h>
 
+#define MAX_AGE     128
+
 // interfaz de usuario consola
 class ui {
     public:
@@ -29,8 +31,8 @@ class ui {
     private:
         uint8_t indexPage;
         options_t opt;
-        uint8_t getAgeWithException();
-        uint8_t getAgeWithException(const int val );
+        int16_t getAgeWithException();
+        int16_t getAgeWithException(const int val );
 
 
 };

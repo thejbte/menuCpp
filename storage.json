@@ -6,39 +6,9 @@
         "name": "Julian"
     },
     "1": {
-        "age": 34,
-        "email": "eeee",
-        "last_name": "www",
-        "name": "aaa"
-    },
-    "2": {
-        "age": 66,
-        "email": "yyy",
-        "last_name": "ttt",
-        "name": "rrr"
-    },
-    "3": {
-        "age": 6,
-        "email": "i",
-        "last_name": "o",
-        "name": "p"
-    },
-    "4": {
-        "age": 2,
-        "email": "r",
-        "last_name": "e",
-        "name": "w"
-    },
-    "5": {
-        "age": 4,
-        "email": "7",
-        "last_name": "6",
-        "name": "5"
-    },
-    "6": {
-        "age": 2,
-        "email": "qq",
-        "last_name": "ttt",
-        "name": "rrr"
+        "age": 9,
+        "email": "julian123",
+        "last_name": "llalala",
+        "name": "lalal"
     }
 }

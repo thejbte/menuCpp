@@ -132,7 +132,7 @@ void user::setEmail( std::string email){
     this->person.email = email;
 }
 
-void user::setAge( uint8_t age){
+void user::setAge( int16_t age){
     this->person.age = age;
 }
 
