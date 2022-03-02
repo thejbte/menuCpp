@@ -1,36 +1,42 @@
 #include <string>
 #include <stdint.h>
 #include "../single_include/nlohmann/json.hpp"
-/*
-La prueba en cuestión es la siguiente: 
-·        Desarrolle una clase que cumpla con las siguientes funciones para crear, modificar, eliminar,
-         listar el modelo. (Para el proceso de guardado puede usar archivos locales con Pickle o JSON)
-·        Generar UI vía interfaz de comandos para usar las diferentes funciones. 
-El modelo para la clase es un usuario con datos simples como:
 
-·        Nombres ,Apellidos , Edad,  Email
-*/
+/*data model*/
+struct person_t {
+    std::string name;
+    std::string lastName;
+    std::string email;
+    uint8_t age;
+    int id;
+};
+
 class user {
     public:
         bool add();
         bool update(int id);
+        bool iSFound(int id);
         bool erase(int id);
         void list();
 
-        void setVariables(std::string name, std::string lastName, std::string email, uint8_t age);
-        void getInputForAdd();
-        int getInputForUpdate();
+        void setName( std::string name);
+        void setLastName( std::string name);
+        void setEmail( std::string name);
+        void setAge( uint8_t setAge);
+        void setId( int id);
+        void setVariables( const struct person_t obj);
+
         user(){
             /*constructor*/
-            age =0;
-            id =0;
+             this->person.age =0;
+             this->person.id =0;
 
             storage = {
-                { std::to_string(id), {
-                    {"name", name},
-                    {"last_name", lastName},
-                    {"email", email},
-                    {"age", age}
+                { std::to_string( this->person.id), {
+                    {"name",  this->person.name},
+                    {"last_name", this->person.lastName},
+                    {"email",  this->person.email},
+                    {"age",  this->person.age}
                     }
                 }
             };
@@ -41,14 +47,6 @@ class user {
         }
     private:
         nlohmann::json storage;
-        std::string name;
-        std::string lastName;
-        std::string email;
-        uint8_t age;
-        int id;
-        // overload function
-        void getAgeWithException();
-        void getAgeWithException(const int val );
-        int getIdWithException();
+        struct person_t person;
 };
 

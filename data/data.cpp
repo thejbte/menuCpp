@@ -3,16 +3,16 @@
 #include "../single_include/nlohmann/json.hpp"
 #include <string>
 #include <exception>
+#include "../common.h"
 
 bool user::add(){
 
-
    nlohmann::json data= {
-        { std::to_string(++id), {
-            {"name", name},
-            {"last_name", lastName},
-            {"email", email},
-            {"age", age}
+        { std::to_string(++person.id), {
+            {"name", person.name},
+            {"last_name", person.lastName},
+            {"email", person.email},
+            {"age", person.age}
             }
         }
     };
@@ -24,15 +24,28 @@ bool user::add(){
 bool user::update(int id ){
     nlohmann::json obj = {
         {std::to_string(id), {
-            {"name", name},
-            {"last_name", lastName},
-            {"email", email},
-            {"age", age}
+            {"name", person.name},
+            {"last_name", person.lastName},
+            {"email", person.email},
+            {"age", person.age}
         }}
         };
-
+        
         storage.update(obj);
     return 1;
+}
+
+bool user::iSFound(int id){
+    bool retVal = false;
+    auto var = storage.find(std::to_string(id));
+    if( (var != storage.end()) == true )
+        retVal = true;
+    else{
+        std::cout << KNRM << "Id: \""<< id <<"\" Do not was found. " << '\n';
+        retVal = false;
+    }
+    return retVal;
+    
 }
 
 bool user::erase(int id){
@@ -42,121 +55,29 @@ bool user::erase(int id){
 void user::list(){
     std::cout << storage << '\n';
 }
-
-//setter
-
-void user::setVariables(std::string name, std::string lastName, std::string email, uint8_t age){
-    this->name = name;
-    this->lastName = lastName;
-    this->email = email;
-    this->age = age;
+void user::setName( std::string name){
+    this->person.name = name;
 }
 
-
-void user::getInputForAdd(){
-    std::string in;
-    std::cout<< "Entry Name: "<<std::endl ;
-    std::cin >> this->name;
-
-    std::cout<< "Entry last name: "<<std::endl ;
-    std::cin.ignore();    // ignorar enter
-    std::getline(std::cin, this->lastName);
-
-    std::cout<< "Entry email: "<<std::endl ;
-    std::cin >> this->email;
-
-    getAgeWithException();
-
-    
-}
-int user::getInputForUpdate(){
-    int retVal = 0;
-    std::string in;
-    uint8_t inD;
-
-    int id = getIdWithException();
-    if(id == -1){
-        return -1 ;
-    }//else positivos
-    this->id = id;
-
-    std::cout<< "Entry Name: "<<std::endl ;
-    std::cin >> in;
-    if( in != "")
-        this->name = in;
-
-    std::cout<< "Entry last name: "<<std::endl ;
-    std::cin >> in;
-    if( in != "")
-        this->lastName = in;
-
-    std::cout<< "Entry email: "<<std::endl ;
-    std::cin >> in;
-    if( in != "")
-        this->email = in;
-
-    getAgeWithException(0);
-    
+void user::setLastName( std::string lastName){
+    this->person.lastName = lastName;
 }
 
-void user::getAgeWithException()
-{   std::string in;
-    int var =1;
-    while(var) {
-        int count=0;
-      try
-      { 
-         std::cout<< "Entry age: "<<std::endl ;
-         std::cin >> in;
-         this->age = std::stoi(in);
-         var = 0;
-      } 
-      catch ( const std::invalid_argument  &e )
-      {
-         std::cout << "Invalid Input , should be numeric : " << std::endl ;
-      } 
-    }
+void user::setEmail( std::string email){
+    this->person.email = email;
 }
 
-void user::getAgeWithException(const int val )
-{   std::string in;
-    int var =1;
-    while(var) {
-        int count=0;
-      try
-      { 
-         std::cout<< "Entry age: "<<std::endl ;
-         std::cin >> in;
-         if( in != "")
-            this->age = std::stoi(in);
-         var = 0;
-         
-      } 
-      catch ( const std::invalid_argument  &e )
-      {
-         std::cout << "Invalid Input , should be numeric : " << std::endl ;
-      } 
-    }
+void user::setAge( uint8_t age){
+    this->person.age = age;
 }
 
-int user::getIdWithException()
-{   std::string in;
-    int id;
-    int var =1;
-    while(var) {
-        int count=0;
-      try
-      { //TODO: pendiente validar negativos
-         std::cout<< "Entry ID for update fields or -1 for return to menu "<<std::endl ;
-         std::cin >> in;
-         id = std::stoi(in);
-         var = 0;
-         return id;
-         
-      } 
-      catch ( const std::invalid_argument  &e )
-      {
-         std::cout << "Invalid Input , should be numeric : " << std::endl ;
-      } 
-    }
+void user::setId( int id){
+    this->person.id = id;
+}
+
+void user::setVariables( const struct person_t obj){
+    this->person.name = obj.name;
+    this->person.lastName = obj.lastName;
+    this->person.email = obj.email;
+    this->person.age = obj.age;
 }
