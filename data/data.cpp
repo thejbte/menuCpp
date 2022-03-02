@@ -60,23 +60,28 @@ user::user(){
 }
 
 bool user::add(){
-    if(this->iSFound(person.id) == 0){
-        nlohmann::json data= {
-            { std::to_string(person.id++), {
-                {"name", person.name},
-                {"last_name", person.lastName},
-                {"email", person.email},
-                {"age", person.age}
+    bool ret = true;
+    do{
+        if(this->iSFound(person.id) == 0){
+            nlohmann::json data= {
+                { std::to_string(person.id++), {
+                    {"name", person.name},
+                    {"last_name", person.lastName},
+                    {"email", person.email},
+                    {"age", person.age}
+                    }
                 }
-            }
-        };
-        
-        storage.insert(data.begin() , data.end());
-        JSONUTILS::writeTofile("../storage.json",storage );
-        return 1;
-    }
-
-    return 0;
+            };
+            
+            storage.insert(data.begin() , data.end());
+            JSONUTILS::writeTofile("../storage.json",storage );
+            ret = false;
+            //return 1;
+        }else{
+            person.id++;
+        }
+    }while(ret);
+    return 1;
 }
 
 bool user::update(int id ){

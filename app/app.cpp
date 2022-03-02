@@ -8,12 +8,12 @@ int application::appRun(){
     {
     case ui::ADD:
         usuario.setVariables( interfaz.getInputForAdd() );
-        if( usuario.add() == 1)
-            std::cout << KGRN << "Creation Successful.!"<< KNRM <<std::endl;
-        else
-            std::cout << KRED << "Elemen alrady exist.!"<< KNRM <<std::endl;
+        usuario.add() ;
+        std::cout << KGRN << "Creation Successful.!"<< KNRM <<std::endl;
+
         opt = ui::SHOW;
         break;
+
     case ui::DELETE:{
         usuario.list();
         int id = interfaz.getIdWithException();
@@ -42,7 +42,7 @@ int application::appRun(){
         break;
     case ui::SHOW:{
         usuario.list();
-        std::cout<< "Entry any key for continue: "<<std::endl ;
+        std::cout<< "Entry any key and hit enter to continue: "<<std::endl ;
         std::string in;
         std::cin >> in ;
         }
